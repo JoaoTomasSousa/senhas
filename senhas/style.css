@@ -1,0 +1,246 @@
+:root {
+  --roxo: #2e1c46;
+  --roxo-escuro: #1f1230;
+  --roxo-claro: #4a2f6e;
+  --turquesa: #61c2cb;
+  --petroleo: #039aad;
+  --fundo: #f4f1f8;
+  --branco: #ffffff;
+  --cinza: #6b6280;
+  --linha: #e4deee;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+  background: var(--fundo);
+  color: var(--roxo);
+  min-height: 100vh;
+}
+
+/* ---------- Topo com logótipo ---------- */
+.topo {
+  background: linear-gradient(135deg, var(--roxo-escuro), var(--roxo) 60%, var(--roxo-claro));
+  color: #fff;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 4px 20px rgba(46, 28, 70, .25);
+}
+.topo img { width: 56px; height: 56px; border-radius: 14px; display: block; }
+.topo .titulo { font-size: 1.4rem; font-weight: 700; line-height: 1.1; }
+.topo .subtitulo { font-size: .85rem; color: var(--turquesa); font-weight: 500; }
+.topo .espaco { flex: 1; }
+.topo a.link { color: #fff; text-decoration: none; font-size: .9rem; border: 1px solid rgba(255,255,255,.35); padding: .4rem .9rem; border-radius: 999px; }
+.topo a.link:hover { background: rgba(255,255,255,.12); }
+
+.conteudo { max-width: 960px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+
+/* ---------- Campo de texto ---------- */
+.campo label { display: block; font-weight: 600; margin-bottom: .5rem; font-size: 1.1rem; }
+.campo input {
+  width: 100%;
+  font: inherit;
+  font-size: 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--linha);
+  border-radius: 1rem;
+  background: #fff;
+  color: var(--roxo);
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.campo input:focus { border-color: var(--turquesa); box-shadow: 0 0 0 4px rgba(97, 194, 203, .25); }
+
+/* ---------- Cartões de serviço ---------- */
+.grelha { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+@media (max-width: 640px) { .grelha { grid-template-columns: 1fr; } }
+
+.servico {
+  font: inherit;
+  background: #fff;
+  border: 2px solid var(--linha);
+  border-radius: 1.5rem;
+  padding: 2rem 1rem;
+  cursor: pointer;
+  text-align: center;
+  color: var(--roxo);
+  box-shadow: 0 6px 18px rgba(46, 28, 70, .07);
+  transition: transform .15s, border-color .15s, box-shadow .15s;
+}
+.servico:hover { transform: translateY(-4px); border-color: var(--turquesa); box-shadow: 0 12px 28px rgba(3, 154, 173, .18); }
+.servico:active { transform: scale(.98); }
+.servico:disabled { opacity: .6; cursor: wait; }
+.servico .icone {
+  width: 84px; height: 84px; margin: 0 auto .9rem;
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--turquesa), var(--petroleo));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.6rem;
+}
+.servico .nome { font-size: 1.6rem; font-weight: 700; }
+.servico .letra { color: var(--cinza); font-size: .9rem; margin-top: .15rem; }
+
+/* ---------- Botões ---------- */
+.btn {
+  font: inherit;
+  font-weight: 600;
+  font-size: 1.15rem;
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform .1s, filter .15s;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+}
+.btn:hover { filter: brightness(1.06); }
+.btn:active { transform: scale(.98); }
+.btn-primario { background: var(--petroleo); color: #fff; box-shadow: 0 6px 16px rgba(3, 154, 173, .3); }
+.btn-secundario { background: rgba(97, 194, 203, .2); color: var(--roxo); border-color: var(--turquesa); }
+.btn-escuro { background: var(--roxo); color: #fff; }
+.btn-perigo { background: transparent; color: #b4234b; border-color: #e7b4c3; font-size: 1rem; padding: .75rem; }
+
+/* ---------- Talão (senha emitida) ---------- */
+#overlay {
+  display: none; position: fixed; inset: 0; z-index: 20;
+  background: rgba(31, 18, 48, .75); backdrop-filter: blur(4px);
+  align-items: center; justify-content: center; padding: 1rem;
+}
+.talao {
+  background: #fff; width: 100%; max-width: 380px; border-radius: 1.5rem;
+  overflow: hidden; text-align: center; box-shadow: 0 24px 60px rgba(0, 0, 0, .4);
+  animation: entrar .25s ease-out;
+}
+@keyframes entrar { from { transform: translateY(24px) scale(.96); opacity: 0; } to { transform: none; opacity: 1; } }
+.talao .cabeca { background: var(--roxo); padding: 1.1rem; }
+.talao .cabeca img { width: 64px; height: 64px; border-radius: 16px; }
+.talao .corpo { padding: 1.5rem 1.5rem 1rem; }
+.talao .rotulo { color: var(--cinza); font-size: .85rem; letter-spacing: .15em; text-transform: uppercase; }
+.talao .codigo { font-size: 5.5rem; font-weight: 800; line-height: 1.05; color: var(--petroleo); }
+.talao .nome { font-size: 1.5rem; font-weight: 600; margin-top: .5rem; }
+.talao .meta { color: var(--cinza); font-size: .95rem; }
+.talao .servico-nome { display: inline-block; margin-top: .75rem; background: rgba(97, 194, 203, .25); padding: .3rem 1rem; border-radius: 999px; font-weight: 600; }
+.talao .corte { border-top: 3px dashed var(--linha); margin: 1.25rem 0 0; }
+.talao .info { padding: 1rem 1.5rem; color: var(--cinza); font-size: .95rem; }
+.talao .acoes { display: flex; gap: .75rem; padding: 0 1.5rem 1.5rem; }
+.talao .acoes .btn { flex: 1; font-size: 1rem; padding: .8rem; }
+
+@media print {
+  body * { visibility: hidden; }
+  #overlay, #overlay * { visibility: visible; }
+  #overlay { position: absolute; background: #fff; backdrop-filter: none; }
+  .talao { box-shadow: none; animation: none; }
+  .no-print { display: none !important; }
+}
+
+/* ---------- Painel do balcão ---------- */
+.painel { background: #fff; border-radius: 1.5rem; padding: 2rem 1.5rem; text-align: center; box-shadow: 0 8px 24px rgba(46, 28, 70, .1); margin-bottom: 1.5rem; border: 2px solid var(--linha); }
+.painel .rotulo { color: var(--cinza); letter-spacing: .15em; text-transform: uppercase; font-size: .85rem; }
+.painel .codigo-grande { font-size: 6rem; font-weight: 800; line-height: 1.05; color: var(--petroleo); }
+.painel .cliente-nome { font-size: 1.6rem; font-weight: 600; margin-top: .5rem; min-height: 2.2rem; }
+.painel .cliente-id { color: var(--cinza); min-height: 1.4rem; }
+.painel .espera { margin-top: 1rem; display: inline-block; background: rgba(97, 194, 203, .25); padding: .35rem 1.1rem; border-radius: 999px; font-weight: 600; }
+.acoes-balcao { display: grid; gap: .9rem; }
+
+.lista-balcoes { display: grid; gap: 1rem; }
+.lista-balcoes a {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #fff; border: 2px solid var(--linha); border-radius: 1.25rem;
+  padding: 1.25rem 1.5rem; text-decoration: none; color: var(--roxo);
+  font-size: 1.4rem; font-weight: 700; transition: .15s;
+}
+.lista-balcoes a:hover { border-color: var(--turquesa); transform: translateY(-2px); }
+.lista-balcoes small { color: var(--cinza); font-weight: 500; font-size: 1rem; }
+
+/* ---------- Quiosque em ecrã inteiro: nome em cima + 4 quadrantes ---------- */
+body.quiosque { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+body.quiosque .conteudo {
+  flex: 1; min-height: 0; width: 100%; max-width: none; margin: 0;
+  display: flex; flex-direction: column; padding: 1.25rem 2rem 2rem;
+}
+body.quiosque .campo { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.25rem; }
+body.quiosque .campo label { margin: 0; white-space: nowrap; }
+body.quiosque .campo input {
+  width: 100%;
+  max-width: 560px;
+  font-size: clamp(1.6rem, 3vh, 2.4rem);
+  padding: clamp(1.1rem, 2.4vh, 1.8rem) 1.75rem;
+  border-radius: 1.25rem;
+}
+body.quiosque .grelha { flex: 1; min-height: 0; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 1.5rem; }
+body.quiosque .servico { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; min-height: 0; }
+body.quiosque .servico .icone {
+  width: clamp(64px, 14vh, 130px); height: clamp(64px, 14vh, 130px);
+  font-size: clamp(2rem, 7vh, 4rem); border-radius: 28px; margin: 0 0 .8rem;
+}
+body.quiosque .servico .nome { font-size: clamp(1.8rem, 4vw, 3.2rem); }
+
+@media (max-width: 640px) {
+  body.quiosque { height: auto; overflow: auto; }
+  body.quiosque .campo { flex-direction: column; align-items: stretch; gap: .5rem; }
+  body.quiosque .grelha { grid-template-columns: 1fr; grid-template-rows: none; }
+  body.quiosque .servico { padding: 2rem 1rem; }
+}
+
+/* ---------- Botões ligados num só bloco, com movimento e cor ao clicar ---------- */
+body.quiosque .grelha {
+  gap: 2px;
+  background: var(--linha);
+  border: 2px solid var(--linha);
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(46, 28, 70, .08);
+}
+body.quiosque .servico {
+  position: relative;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: #fff;
+  transition: background .2s, color .2s;
+  -webkit-tap-highlight-color: transparent;
+}
+body.quiosque .servico > * { position: relative; z-index: 1; transition: transform .15s; }
+
+/* passar o rato: tom turquesa e ícone a balançar */
+body.quiosque .servico:hover { transform: none; box-shadow: none; border: 0; background: rgba(97, 194, 203, .3); }
+body.quiosque .servico:hover .icone { animation: balancar .9s ease-in-out infinite; }
+
+/* carregar: cor forte, texto branco e conteúdo a encolher */
+body.quiosque .servico:active,
+body.quiosque .servico.ativo { background: var(--petroleo); color: #fff; }
+body.quiosque .servico:active > *,
+body.quiosque .servico.ativo > * { transform: scale(.94); }
+body.quiosque .servico.ativo .icone { background: #fff; animation: none; }
+body.quiosque .servico:disabled { opacity: 1; cursor: wait; }
+
+@keyframes balancar {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-8px) rotate(-4deg); }
+}
+
+/* ícones simples (traço) */
+.servico .icone svg { width: 58%; height: 58%; stroke: #fff; transition: stroke .2s; }
+body.quiosque .servico.ativo .icone svg { stroke: var(--petroleo); }
+
+/* onda de cor a partir do ponto onde se clicou */
+.onda {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--petroleo);
+  pointer-events: none;
+  z-index: 0;
+  transform: scale(0);
+  animation: onda .7s ease-out forwards;
+}
+@keyframes onda {
+  from { transform: scale(0); opacity: .9; }
+  70% { opacity: .9; }
+  to { transform: scale(1); opacity: 0; }
+}
